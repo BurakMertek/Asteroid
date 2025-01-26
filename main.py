@@ -11,11 +11,11 @@ def main():
     
     clock = pygame.time.Clock()
     dt = 0
-    updatable = []
-    drawable = []
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    updatable.append(player)
-    drawable.append(player)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
