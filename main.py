@@ -11,7 +11,8 @@ from shot import Shot
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    
+    background = pygame.image.load("assets/background.jpeg")
+    background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
     lives = 3
@@ -50,7 +51,7 @@ def main():
                     asteroid.split()
                     shot.kill()
                     score += 31
-        screen.fill("black")
+        screen.blit(background, (0, 0))
         for obj in drawable:
             obj.draw(screen)
         
