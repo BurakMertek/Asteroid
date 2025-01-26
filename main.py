@@ -14,6 +14,7 @@ def main():
     
     clock = pygame.time.Clock()
     dt = 0
+    lives = 3
     score = 0
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -36,8 +37,13 @@ def main():
             obj.update(dt)
         for asteroid in asteroids:
             if player.collision(asteroid):
-                print("Game over!")
-                return
+                lives -= 1
+                if lives <= 0:
+                    print("Game over!")
+                    return
+                player.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+                
         for asteroid in asteroids:
             for shot in shots:
                 if shot.collision(asteroid):
