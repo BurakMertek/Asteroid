@@ -6,7 +6,7 @@ from constants import *
 from player import Player
 from asteroid import *
 from asteroidfield import *
-from shot import *
+from shot import Shot
 
 def main():
     pygame.init()
@@ -37,7 +37,12 @@ def main():
         for asteroid in asteroids:
             if player.collision(asteroid):
                 print("Game over!")
-                return 
+                return
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision(asteroid):
+                    asteroid.kill()
+                    shot.kill()
         screen.fill("black")
         for obj in drawable:
             obj.draw(screen)
