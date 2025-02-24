@@ -16,8 +16,7 @@ class Asteroid(CircleShape):
         colors = {
             1: "gray",
             2: "brown",
-            3: "red",
-            4: "black"
+            3: "red"
         }
         return colors.get(self.kind, "gray")
 
