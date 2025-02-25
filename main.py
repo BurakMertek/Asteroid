@@ -36,12 +36,12 @@ def main():
         for obj in updatable:
             obj.update(dt)
         for asteroid in asteroids:
-            if player.collision(asteroid):
+            if not player.invincible and player.collision(asteroid):
                 lives -= 1
                 if lives <= 0:
                     print("Game over!")
                     return
-                player.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+                player.respwan()
 
                 
         for asteroid in asteroids:
