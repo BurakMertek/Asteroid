@@ -32,8 +32,10 @@ class Player(CircleShape):
         self.shoot_timer -= dt
         if self.invincible:
             self.invincible_timer -=dt
+            print(f"Invincibility Timer: {self.invincible_timer}")
             if self.invincible_timer <= 0:
                 self.invincible = False
+                print("Player is no longer invincible!")
 
 
         keys = pygame.key.get_pressed()
@@ -60,8 +62,11 @@ class Player(CircleShape):
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
-    def respwan():
+    def respawn():
+        print("Respawning player...")
         self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self.velocity = pygame.Vector2(0, 0)
         self.invincible = True
         self.invincible_timer = 2
+        print("Player is now invincible!")
         

@@ -14,7 +14,7 @@ def main():
     
     clock = pygame.time.Clock()
     dt = 0
-    lives = 3
+    lives = 5
     score = 0
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -37,11 +37,13 @@ def main():
             obj.update(dt)
         for asteroid in asteroids:
             if not player.invincible and player.collision(asteroid):
+                print("Collision detected! Respawning...")
                 lives -= 1
-                if lives <= 0:
+                if lives == 0:
                     print("Game over!")
                     return
-                player.respwan()
+                Player.respawn()
+                print(f"Lives left: {lives}")
 
                 
         for asteroid in asteroids:
@@ -49,7 +51,7 @@ def main():
                 if shot.collision(asteroid):
                     asteroid.split()
                     shot.kill()
-                    score += 31
+                    score += 5
         screen.fill("black")
         for obj in drawable:
             obj.draw(screen)
@@ -57,6 +59,8 @@ def main():
         font = pygame.font.Font(None, 36)
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (10, 10))
+        lives_text = font.render(f"Lives: {lives}", True, (255, 255, 255))
+        screen.blit(lives_text, (1180, 10))
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000
